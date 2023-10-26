@@ -1,7 +1,7 @@
 # NewGame
 Repository for our cosy detective-style rpg.  
-
-## Project Structure  
+  
+## Project Structure  
 - `assets`: Contains all of the assets, both visual and audio, tied to the game.
 - `src`: Contains all of the source code that is specific to our game.
   - `src/cs`: C# scripts.
