@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://x548q107qlrk"]
+
+[ext_resource type="Texture2D" uid="uid://bf3qgysmlsu0t" path="res://assets/test/Blue_witch/B_witch_run.png" id="1_toib4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rsyt3"]
+atlas = ExtResource("1_toib4")
+region = Rect2(0.344604, 1.11002, 32.5639, 43.0505)
+
+[node name="Player" type="Node2D"]
+
+[node name="sprite" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_rsyt3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
