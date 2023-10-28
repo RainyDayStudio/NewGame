@@ -15,9 +15,8 @@
 	You should have received a copy of the GNU General Public License
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-using Godot;
-using System;
 
+namespace Godot {
 // Generic Node that enables it's owner to receive user input
 // The basic capabilities it enables are movement
 public partial class InputManager : Node {
@@ -61,5 +60,5 @@ public partial class InputManager : Node {
 
 		return (InputVec, RunRequest);
 	}
-
 }
+} // End Namespace Godot
