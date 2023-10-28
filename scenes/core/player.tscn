@@ -1,16 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://x548q107qlrk"]
+[gd_scene load_steps=6 format=3 uid="uid://x548q107qlrk"]
 
-[ext_resource type="Script" path="res://src/cs/core/player.cs" id="1_7l4xy"]
+[ext_resource type="Script" path="res://src/cs/core/Player.cs" id="1_5abb1"]
 [ext_resource type="Texture2D" uid="uid://bf3qgysmlsu0t" path="res://assets/test/Blue_witch/B_witch_run.png" id="1_toib4"]
+[ext_resource type="Script" path="res://src/cs/core/managers/InputManager.cs" id="3_d1yhh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rsyt3"]
 atlas = ExtResource("1_toib4")
 region = Rect2(0.344604, 1.11002, 32.5639, 43.0505)
 
-[node name="Player" type="Node2D"]
-script = ExtResource("1_7l4xy")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6rqmw"]
+size = Vector2(20, 41)
 
-[node name="sprite" type="Sprite2D" parent="."]
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_5abb1")
+
+[node name="Sprite" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_rsyt3")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -18,3 +22,8 @@ texture = SubResource("AtlasTexture_rsyt3")
 [node name="AnimationTree" type="AnimationTree" parent="."]
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_6rqmw")
+
+[node name="InputManager" type="Node" parent="."]
+script = ExtResource("3_d1yhh")

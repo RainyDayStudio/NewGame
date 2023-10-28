@@ -4,4 +4,18 @@
 
 [node name="World" type="Node2D"]
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1144.0
+offset_bottom = 645.0
+
 [node name="Player" parent="." instance=ExtResource("1_c1fn1")]
+position = Vector2(500, 250)
+scale = Vector2(3, 3)
+RunSpeed = 400
+WalkSpeed = 300
+
+[node name="Bounderies" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bounderies"]
+position = Vector2(571, 322)
+polygon = PackedVector2Array(-566, -333, -565, 316, 565, 314, 566, -319, -564, -324, -566, -344, 588, -336, 587, 335, -585, 339, -581, -332)
