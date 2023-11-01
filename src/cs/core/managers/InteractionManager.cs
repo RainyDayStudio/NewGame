@@ -50,27 +50,24 @@ public partial class InteractionManager : Node2D {
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta) {
-		// Poll for interaction
-		HandleInteraction();
+	public override void _Process(double delta) {}
+
+	// ==================== Public aPI ====================
+
+	// Manages checking whether interaction has been requested or not
+	// If requested, triggers an interaction with the closest interactable
+	public void _HandleInteraction() {
+		// Start by checking that we have subs
+		if(Subs.Count > 0) {
+			// Check subs find the closest one
+			Interactable closest = FindClosestSub();
+
+			// Trigger that sub's interact function
+			closest.Interact();
+		}
 	}
 
 	// ==================== Internal Helpers ====================
-
-	// Manages checking whether interaction has been requested or not
-	private void HandleInteraction() {
-		// Check for interaction input
-		if(Input.IsActionPressed("ui_interact")) {
-			// Start by checking that we have subs
-			if(Subs.Count > 0) {
-				// Check subs find the closest one
-				Interactable closest = FindClosestSub();
-
-				// Trigger that sub's interact function
-				closest.Interact();
-			}
-		}
-	}
 
 	// Checks subs to find the closest one to the interactor
 	private Interactable FindClosestSub() => Subs

@@ -39,7 +39,7 @@ public partial class InputManager : Node {
 
 	// ==================== Public API ====================
 
-	// Retruns the current value of the input vector
+	// Returns the current value of the input vector
 	// @param {bool}, wether or not the owner is in a moveable state
 	// e.g. if the owner is in a dialog, then they can't move
 	// @returns {Vector2, bool} the input vector along with a runrequest flag
@@ -60,5 +60,10 @@ public partial class InputManager : Node {
 
 		return (InputVec, RunRequest);
 	}
+
+	// Returns wether or not interaction has been requested
+	// @param {bool}, interaction enabler
+	public bool _CheckInteractionInput(bool canInteract=true) =>
+		canInteract && Input.IsActionPressed("ui_interact");
 }
 } // End Namespace Godot

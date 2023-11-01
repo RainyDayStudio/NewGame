@@ -16,6 +16,7 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 using Godot;
+using Microsoft.VisualBasic;
 using System;
 
 // Models the player, i.e. the user's entry point into the game
@@ -71,6 +72,9 @@ public partial class Player : CharacterBody2D {
     // Enables the use of input
     private InputManager IM;
 
+    // Enables the use of interaction
+    private InteractionManager IntM;
+
     // ==================== Internal fields ====================
     // Stores the players current state
     private PlayerState State = PlayerState.IDLE;
@@ -84,6 +88,7 @@ public partial class Player : CharacterBody2D {
         AT = GetNode<AnimationTree>("AnimationTree");
         Hitbox = GetNode<CollisionShape2D>("Hitbox");
         IM = GetNode<InputManager>("InputManager");
+        IntM = GetNode<InteractionManager>("InteractionManager");
     }
 
     // Called at the start of every frame
@@ -92,6 +97,9 @@ public partial class Player : CharacterBody2D {
 
         // Handle the player's movement
         HandleMovement(delta);
+
+        // Handle the player's interactions
+        HandleInteraction();
     }
 
     // ==================== Internal Helpers ====================
@@ -118,6 +126,15 @@ public partial class Player : CharacterBody2D {
 
         // Move the player using the built-in move&slide method for character bodies
         MoveAndSlide();
+    }
+
+    // Checks for an interaction input and calls the interaction handler
+    private void HandleInteraction() {
+        // Check the input manager for an interaction request
+        if(IM._CheckInteractionInput()) {
+            // Request an interaction
+            IntM._HandleInteraction();
+        }
     }
 }
 
