@@ -26,19 +26,19 @@ using System;
 // Namespace declaration necessary for utility types
 namespace Godot {
 
-    // Abstract interface used to signify that a node2D is an interactor
-    public interface Interactable {
+// Abstract interface used to signify that a node2D is an interactor
+public interface Interactable {
 
-        // ==================== Abstract methods ====================
+	// ==================== Abstract methods ====================
 
-        // Usually a reaction to a button press, this will signify that 
-        // the interactor wants to interact with something
-        public void Interact();
+	// Usually a reaction to a button press, this will signify that 
+	// the interactor wants to interact with something
+	public void Interact();
 
-		// Triggers a reaction when an interactor enters the interaction range
-		public void EnterInteractRange();
+	// Triggers a reaction when an interactor enters the interaction range
+	public void EnterInteractRange();
 
-		// Triggers a reaction when an interactor exits the interaction range
-		public void ExitInteractRange();
-    }
+	// Triggers a reaction when an interactor exits the interaction range
+	public void ExitInteractRange();
 }
+} // End Godot namespace
