@@ -18,9 +18,10 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 // Models an object that can be interacted with
-public partial class Interactable : Node2D {
+public partial class InteractionManager : Node2D {
 
 	// ==================== Children Nodes ====================
 
@@ -60,9 +61,25 @@ public partial class Interactable : Node2D {
 	private void HandleInteraction() {
 		// Check for interaction input
 		if(Input.IsActionPressed("ui_interact")) {
-			// Check subs find the closest one
+			// Start by checking that we have subs
+			if(Subs.Count > 0) {
+				// Check subs find the closest one
+				Interactable closest = FindClosestSub();
+
+				// Trigger that sub's interact function
+				closest.Interact();
+			}
 		}
 	}
+
+	// Checks subs to find the closest one to the interactor
+	private Interactable FindClosestSub() => Subs
+		// Map all subs to their respective distances from the player
+		.Select(s => (s, GetOwner<Node2D>().Position.DistanceSquaredTo((s as Node2D).Position)))
+		// Pick the one with the smallest value
+		.Aggregate((Subs[0], GetOwner<Node2D>().Position.DistanceSquaredTo((Subs[0] as Node2D).Position)), 
+			(min, s) => min.Item2 > s.Item2 ? s : min
+		).Item1;
 
 	// ==================== Signal Callbacks ====================
 
@@ -76,6 +93,9 @@ public partial class Interactable : Node2D {
 			// Check that it isn't already in our list, if not add it
 			if(!Subs.Contains(own)) {
 				Subs.Add(own);
+
+				// Trigger the new sub's enter reaction
+				own.EnterInteractRange();
 			}
 		} 
 	}
@@ -90,6 +110,9 @@ public partial class Interactable : Node2D {
 			// Check that it isn't already in our list, if not add it
 			if(Subs.Contains(own)) {
 				Subs.Remove(own);
+
+				// Trigger the new sub's exit reaction
+				own.ExitInteractRange();
 			}
 		} 
 	}

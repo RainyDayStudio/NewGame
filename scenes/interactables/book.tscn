@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://c6amx8mnr12s5"]
+
+[ext_resource type="Texture2D" uid="uid://dk046lq6w6eyo" path="res://assets/test/book.png" id="1_usfm5"]
+[ext_resource type="Script" path="res://src/cs/interactables/Book.cs" id="1_wf36s"]
+[ext_resource type="Texture2D" uid="uid://bl10v5tfraf7t" path="res://assets/test/presse1.png" id="3_c8wcn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3c6jp"]
+radius = 225.009
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_134m6"]
+size = Vector2(279, 199)
+
+[node name="Book" type="Node2D"]
+script = ExtResource("1_wf36s")
+
+[node name="BookSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_usfm5")
+
+[node name="E" type="Sprite2D" parent="."]
+position = Vector2(16, -272)
+scale = Vector2(10, 10)
+texture = ExtResource("3_c8wcn")
+
+[node name="InteractRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractRange"]
+shape = SubResource("CircleShape2D_3c6jp")
+
+[node name="Hitbox" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(1.5, -24.5)
+shape = SubResource("RectangleShape2D_134m6")

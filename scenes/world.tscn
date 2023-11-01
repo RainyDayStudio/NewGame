@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dn2him3yja7py"]
+[gd_scene load_steps=3 format=3 uid="uid://dn2him3yja7py"]
 
 [ext_resource type="PackedScene" uid="uid://x548q107qlrk" path="res://scenes/core/player.tscn" id="1_c1fn1"]
+[ext_resource type="PackedScene" uid="uid://c6amx8mnr12s5" path="res://scenes/interactables/book.tscn" id="2_l0s1p"]
 
 [node name="World" type="Node2D"]
 
@@ -19,3 +20,7 @@ WalkSpeed = 300
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bounderies"]
 position = Vector2(571, 322)
 polygon = PackedVector2Array(-566, -333, -565, 316, 565, 314, 566, -319, -564, -324, -566, -344, 588, -336, 587, 335, -585, 339, -581, -332)
+
+[node name="Book" parent="." instance=ExtResource("2_l0s1p")]
+position = Vector2(520, 528)
+scale = Vector2(0.21, 0.21)

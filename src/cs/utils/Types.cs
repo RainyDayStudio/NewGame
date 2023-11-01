@@ -34,5 +34,11 @@ namespace Godot {
         // Usually a reaction to a button press, this will signify that 
         // the interactor wants to interact with something
         public void Interact();
+
+		// Triggers a reaction when an interactor enters the interaction range
+		public void EnterInteractRange();
+
+		// Triggers a reaction when an interactor exits the interaction range
+		public void ExitInteractRange();
     }
 }
