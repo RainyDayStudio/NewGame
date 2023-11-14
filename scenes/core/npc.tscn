@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://biqfp7ic8b3iw"]
+[gd_scene load_steps=7 format=3 uid="uid://biqfp7ic8b3iw"]
 
 [ext_resource type="Texture2D" uid="uid://besvq1tualfmj" path="res://assets/test/adrienPichard.png" id="1_l6dnh"]
 [ext_resource type="Script" path="res://src/cs/core/NPC.cs" id="1_yoywl"]
+[ext_resource type="PackedScene" uid="uid://c1420od81yknw" path="res://scenes/core/dialog_manager.tscn" id="3_boysx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5id12"]
 atlas = ExtResource("1_l6dnh")
@@ -28,3 +29,7 @@ shape = SubResource("RectangleShape2D_jvkw6")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionRange"]
 position = Vector2(-2, 11)
 shape = SubResource("CapsuleShape2D_i1jqc")
+
+[node name="DialogManager" parent="." instance=ExtResource("3_boysx")]
+position = Vector2(0, -35)
+scale = Vector2(0.62, 0.62)

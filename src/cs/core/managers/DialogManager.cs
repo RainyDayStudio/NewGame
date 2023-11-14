@@ -18,34 +18,30 @@
 using Godot;
 using System;
 
-// Models a generic Non-Playable Character
-// These characters are interactable and can have dialog
-public partial class NPC : CharacterBody2D, Interactable {
+// Handles displaying and updating dialog from any entity that parents this node
+public partial class DialogManager : Node2D {
 
 	// ==================== Children Nodes ====================
-	// Used to display the npc's image
-	private Sprite2D Sprite;
+
+	// Background containing the text 
+	private Sprite2D TextBox;
+	// Text label itself. This will contain the dialog
+	private Label Body;
+	// Interaction prompt shown when the player can continue the text
+	private Sprite2D E;
 
 	// ==================== GODOT Method Overrides ====================
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
-		// Fetch the children nodes
-		Sprite = GetNode<Sprite2D>("Sprite");
+		// Fetch children nodes
+		TextBox = GetNode<Sprite2D>("TextBoxBG");
+		Body = GetNode<Label>("TextBoxBG/Body");
+		E = GetNode<Sprite2D>("TextBoxBG/E");
 	}
 
-	// Called at the start of every frame
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta) {}
 
-	// ==================== Interactable interface methods ====================
-	public void EnterInteractRange() {
-		throw new NotImplementedException();
-	}
-
-	public void ExitInteractRange() {
-		throw new NotImplementedException();
-	}
-
-	public void Interact() {
-		throw new NotImplementedException();
-	}
+	// ==================== Public API ====================
 }

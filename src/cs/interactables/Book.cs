@@ -43,17 +43,17 @@ public partial class Book : Node2D, Interactable {
 	// ==================== Interactable interface implements ====================
 
 	// A book interaction simply hides the book for now
-    public void Interact() {
-        Hide();
-    }
+	public void Interact() {
+		Hide();
+	}
 
 	// Entering the book's range will show a E overlay
-    public void EnterInteractRange() {
-        E.Show();
-    }
+	public void EnterInteractRange() {
+		E.Show();
+	}
 
 	// On exit, hide the E overlay again
-    public void ExitInteractRange() {
-        E.Hide();
-    }
+	public void ExitInteractRange() {
+		E.Hide();
+	}
 }
