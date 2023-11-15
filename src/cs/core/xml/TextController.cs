@@ -25,7 +25,13 @@ using System.Collections.Generic;
 // This is usually done to display text in a way that is linguistically dynamic .
 public partial class TextController : XMLController {
 
-    // ==================== Internal fields ====================
+	// ==================== Dialog related Constants ====================
+
+	private const string DIALOG_ID = "dialog";
+	private const string TEXT_ID = "text";
+	private const string ID = "id";
+
+	// ==================== Internal fields ====================
 
 	// The currently loaded xml document
 	private XDocument LoadedXML;
@@ -58,35 +64,35 @@ public partial class TextController : XMLController {
 			Lang = C._GetLanguage();
 			
 			// Update the loaded xml
-			ParseXML(ref LoadedXML, Path.Combine("text", Lang.ToString() + "/" + LoadedFileName));
+			ParseXML(ref LoadedXML, Path.Combine(DIALOG_ID, Lang.ToString() + "/" + LoadedFileName));
 		}
 	}
 
-	// Retrieves the number of texts in a group
+	// Retrieves the number of text entries in a dialog
 	public int _GetNTexts(string filename, string groupid) {
 		// Start by checking if the file is loaded in or not
 		CheckXML(filename);
 
 		// retrieve the number of elements in the given group
-		IEnumerable<int> n_texts = from g in LoadedXML.Root.Descendants("group")
-					where g.Attribute("id").Value == groupid
-					select g.Descendants("text").Count();
+		IEnumerable<int> n_texts = from g in LoadedXML.Root.Descendants(DIALOG_ID)
+					where g.Attribute(ID).Value == groupid
+					select g.Descendants(TEXT_ID).Count();
 		
 		// Extract the result and return it
 		return n_texts.ElementAt(0);
 	}
 
 	// Queries the given xml file to retrieve the wanted text
-	public string _GetText(string filename, string groupid, string id) {
+	public string _GetText(string filename, string dialogid, string id) {
 		// Start by checking if the file is loaded in or not
 		CheckXML(filename);
 
 		// Query the file
-		var query = from g in LoadedXML.Root.Descendants("group")
-					where g.Attribute("id").Value == groupid // Find the correct group
+		var query = from g in LoadedXML.Root.Descendants(DIALOG_ID)
+					where g.Attribute(ID).Value == dialogid // Find the correct group
 					select (
-						from t in g.Descendants("text")
-						where t.Attribute("id").Value == id // Find the correct text in the group
+						from t in g.Descendants(TEXT_ID)
+						where t.Attribute(ID).Value == id // Find the correct text in the group
 						select t.Value
 					);
 
@@ -101,7 +107,7 @@ public partial class TextController : XMLController {
 		// Check if the file is loaded in or not
 		if(LoadedFileName != filename || LoadedLanguage != Lang) {
 			// If not parse the file
-			ParseXML(ref LoadedXML, Path.Combine("text", Lang.ToString() + "/" + filename));
+			ParseXML(ref LoadedXML, Path.Combine(DIALOG_ID, Lang.ToString() + "/" + filename));
 
 			// Update the current loaded file data
 			LoadedFileName = filename;

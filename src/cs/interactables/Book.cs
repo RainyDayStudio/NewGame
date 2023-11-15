@@ -43,8 +43,9 @@ public partial class Book : Node2D, Interactable {
 	// ==================== Interactable interface implements ====================
 
 	// A book interaction simply hides the book for now
-	public void Interact() {
+	public bool Interact() {
 		Hide();
+		return true;
 	}
 
 	// Entering the book's range will show a E overlay

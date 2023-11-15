@@ -26,7 +26,7 @@ public abstract partial class XMLController : Node {
     // ==================== XML related constants ====================
 
 	// The path to the base of the db 
-	protected const string DB_PATH = "db/";
+	protected const string DB_PATH = "db/xml/";
 
 	// ==================== XML Generic methods ====================
 

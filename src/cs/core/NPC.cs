@@ -22,30 +22,38 @@ using System;
 // These characters are interactable and can have dialog
 public partial class NPC : CharacterBody2D, Interactable {
 
+	// ==================== NPC Exports ====================
+	[ExportGroup("Dialog Parameters")]
+	[Export]
+	private string DialogID = "test";
+	[Export]
+	private string FileName = "test.xml";
+
 	// ==================== Children Nodes ====================
 	// Used to display the npc's image
 	private Sprite2D Sprite;
+
+	// Enables dialog
+	private DialogManager DM;
 
 	// ==================== GODOT Method Overrides ====================
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
 		// Fetch the children nodes
 		Sprite = GetNode<Sprite2D>("Sprite");
+		DM = GetNode<DialogManager>("DialogManager");
 	}
 
 	// Called at the start of every frame
 	public override void _Process(double delta) {}
 
 	// ==================== Interactable interface methods ====================
-	public void EnterInteractRange() {
-		throw new NotImplementedException();
-	}
+	public void EnterInteractRange() {}
 
-	public void ExitInteractRange() {
-		throw new NotImplementedException();
-	}
+	public void ExitInteractRange() {}
 
-	public void Interact() {
-		throw new NotImplementedException();
+	// Interaction with the npc will trigger a dialog
+	public bool Interact() {
+		return DM._NextDialog(FileName, DialogID);
 	}
 }

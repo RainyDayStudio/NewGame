@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1420od81yknw"]
+[gd_scene load_steps=5 format=3 uid="uid://c1420od81yknw"]
 
 [ext_resource type="Script" path="res://src/cs/core/managers/DialogManager.cs" id="1_1xq5f"]
 [ext_resource type="Texture2D" uid="uid://bo3gc66odroww" path="res://assets/test/simpleTextBoxBig.png" id="1_hf2n8"]
 [ext_resource type="Texture2D" uid="uid://bl10v5tfraf7t" path="res://assets/test/presse1.png" id="2_sbfn5"]
+[ext_resource type="Script" path="res://src/cs/core/xml/TextController.cs" id="4_60qqg"]
 
 [node name="DialogManager" type="Node2D"]
 script = ExtResource("1_1xq5f")
 
 [node name="TextBoxBG" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("1_hf2n8")
 
 [node name="Body" type="Label" parent="TextBoxBG"]
@@ -25,3 +27,6 @@ clip_text = true
 visible = false
 position = Vector2(77, 28)
 texture = ExtResource("2_sbfn5")
+
+[node name="TextController" type="Node" parent="."]
+script = ExtResource("4_60qqg")

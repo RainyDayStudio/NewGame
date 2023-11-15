@@ -33,7 +33,8 @@ public interface Interactable {
 
 	// Usually a reaction to a button press, this will signify that 
 	// the interactor wants to interact with something
-	public void Interact();
+	// @returns whether or not the interaction has ended
+	public bool Interact();
 
 	// Triggers a reaction when an interactor enters the interaction range
 	public void EnterInteractRange();

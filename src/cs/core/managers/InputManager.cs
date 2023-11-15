@@ -64,6 +64,6 @@ public partial class InputManager : Node {
 	// Returns wether or not interaction has been requested
 	// @param {bool}, interaction enabler
 	public bool _CheckInteractionInput(bool canInteract=true) =>
-		canInteract && Input.IsActionPressed("ui_interact");
+		canInteract && Input.IsActionJustPressed("ui_interact");
 }
 } // End Namespace Godot
