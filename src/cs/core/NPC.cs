@@ -18,43 +18,42 @@
 using Godot;
 using System;
 
-// A simple interactable book
-public partial class Book : Node2D, Interactable {
+// Models a generic Non-Playable Character
+// These characters are interactable and can have dialog
+public partial class NPC : CharacterBody2D, Interactable {
+
+	// ==================== NPC Exports ====================
+	[ExportGroup("Dialog Parameters")]
+	[Export]
+	private string DialogID = "test";
+	[Export]
+	private string FileName = "test.xml";
 
 	// ==================== Children Nodes ====================
+	// Used to display the npc's image
+	private Sprite2D Sprite;
 
-	// Sprite that indicates what button to press
-	private Sprite2D E;
+	// Enables dialog
+	private DialogManager DM;
 
 	// ==================== GODOT Method Overrides ====================
-
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
-		// Fetch children
-		E = GetNode<Sprite2D>("E");
-
-		// Initially hide the overlay
-		E.Hide();
+		// Fetch the children nodes
+		Sprite = GetNode<Sprite2D>("Sprite");
+		DM = GetNode<DialogManager>("DialogManager");
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	// Called at the start of every frame
 	public override void _Process(double delta) {}
 
-	// ==================== Interactable interface implements ====================
+	// ==================== Interactable interface methods ====================
+	public void EnterInteractRange() {}
 
-	// A book interaction simply hides the book for now
+	public void ExitInteractRange() {}
+
+	// Interaction with the npc will trigger a dialog
 	public bool Interact() {
-		Hide();
-		return true;
-	}
-
-	// Entering the book's range will show a E overlay
-	public void EnterInteractRange() {
-		E.Show();
-	}
-
-	// On exit, hide the E overlay again
-	public void ExitInteractRange() {
-		E.Hide();
+		return DM._NextDialog(FileName, DialogID);
 	}
 }

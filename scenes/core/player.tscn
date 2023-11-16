@@ -10,7 +10,7 @@ atlas = ExtResource("1_toib4")
 region = Rect2(0.344604, 1.11002, 32.5639, 43.0505)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6rqmw"]
-size = Vector2(20, 41)
+size = Vector2(14, 13)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_5abb1")
@@ -23,7 +23,7 @@ texture = SubResource("AtlasTexture_rsyt3")
 [node name="AnimationTree" type="AnimationTree" parent="."]
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-position = Vector2(0, -0.5)
+position = Vector2(-1, 13.5)
 shape = SubResource("RectangleShape2D_6rqmw")
 
 [node name="InputManager" type="Node" parent="."]
