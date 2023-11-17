@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2h4trgjjmi0g"]
+
+[ext_resource type="Texture2D" uid="uid://ksays57s80xd" path="res://assets/test/cauldron.png" id="1_b61n6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eiqdj"]
+radius = 14.0357
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jxenj"]
+radius = 28.0179
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_b61n6")
+
+[node name="Hitbox" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_eiqdj")
+
+[node name="InteractionRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionRange"]
+shape = SubResource("CircleShape2D_jxenj")
