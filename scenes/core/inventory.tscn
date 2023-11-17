@@ -5,7 +5,7 @@
 [node name="Inventory" type="Node2D"]
 top_level = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Background" type="Sprite2D" parent="."]
 position = Vector2(578.222, 324.75)
 scale = Vector2(4.46181, 4.46181)
 texture = ExtResource("1_vchs1")

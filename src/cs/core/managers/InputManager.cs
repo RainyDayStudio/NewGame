@@ -66,8 +66,8 @@ public partial class InputManager : Node {
 	public bool _CheckInteractionInput(bool canInteract=true) =>
 		canInteract && Input.IsActionJustPressed("ui_interact");
 
-	// Returns wether or not interaction has been requested
-	// @param {bool}, interaction enabler
+	// Returns wether or not inventory has been requested
+	// @param {bool}, inventory enabler
 	public bool _CheckInventoryInput(bool canOpen=true) =>
 		canOpen && Input.IsActionJustPressed("ui_inventory");
 }
