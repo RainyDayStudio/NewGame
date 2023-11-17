@@ -65,5 +65,10 @@ public partial class InputManager : Node {
 	// @param {bool}, interaction enabler
 	public bool _CheckInteractionInput(bool canInteract=true) =>
 		canInteract && Input.IsActionJustPressed("ui_interact");
+
+	// Returns wether or not interaction has been requested
+	// @param {bool}, interaction enabler
+	public bool _CheckInventoryInput(bool canOpen=true) =>
+		canOpen && Input.IsActionJustPressed("ui_inventory");
 }
 } // End Namespace Godot

@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://x548q107qlrk"]
+[gd_scene load_steps=8 format=3 uid="uid://x548q107qlrk"]
 
 [ext_resource type="Script" path="res://src/cs/core/Player.cs" id="1_5abb1"]
 [ext_resource type="Texture2D" uid="uid://bf3qgysmlsu0t" path="res://assets/test/Blue_witch/B_witch_run.png" id="1_toib4"]
 [ext_resource type="Script" path="res://src/cs/core/managers/InputManager.cs" id="3_d1yhh"]
 [ext_resource type="PackedScene" uid="uid://bifxq15xyby3t" path="res://scenes/core/interactionManager.tscn" id="4_123b2"]
+[ext_resource type="PackedScene" uid="uid://b0jv7lfy5nnar" path="res://scenes/core/inventory.tscn" id="5_lpte7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rsyt3"]
 atlas = ExtResource("1_toib4")
@@ -30,3 +31,6 @@ shape = SubResource("RectangleShape2D_6rqmw")
 script = ExtResource("3_d1yhh")
 
 [node name="InteractionManager" parent="." instance=ExtResource("4_123b2")]
+
+[node name="Inventory" parent="." instance=ExtResource("5_lpte7")]
+visible = false

@@ -8,7 +8,7 @@ radius = 14.0357
 [sub_resource type="CircleShape2D" id="CircleShape2D_jxenj"]
 radius = 28.0179
 
-[node name="Node2D" type="Node2D"]
+[node name="Cauldron" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_b61n6")

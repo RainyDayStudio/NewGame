@@ -18,6 +18,7 @@
 using Godot;
 using Microsoft.VisualBasic;
 using System;
+using System.Diagnostics;
 
 // Models the player, i.e. the user's entry point into the game
 // This will handle all inputs as well as their related character animations
@@ -75,6 +76,9 @@ public partial class Player : CharacterBody2D {
 	// Enables the use of interaction
 	private InteractionManager IntM;
 
+	// Player Inventory
+	private Node2D Inventory;
+
 	// ==================== Internal fields ====================
 	// Stores the players current state
 	private PlayerState State = PlayerState.IDLE;
@@ -89,6 +93,7 @@ public partial class Player : CharacterBody2D {
 		Hitbox = GetNode<CollisionShape2D>("Hitbox");
 		IM = GetNode<InputManager>("InputManager");
 		IntM = GetNode<InteractionManager>("InteractionManager");
+		Inventory = GetNode<Node2D>("Inventory");
 	}
 
 	// Called at the start of every frame
@@ -100,6 +105,9 @@ public partial class Player : CharacterBody2D {
 
 		// Handle the player's interactions
 		HandleInteraction();
+
+		// Handle player Inventory
+		HandleInventory();
 	}
 
 	// ==================== Internal Helpers ====================
@@ -134,6 +142,20 @@ public partial class Player : CharacterBody2D {
 		if(IM._CheckInteractionInput()) {
 			// Request an interaction
 			IntM._HandleInteraction();
+		}
+	}
+
+	private void HandleInventory() {
+		// Check the input manager for open inventory input
+		if(IM._CheckInventoryInput()) {
+			// Change Player State
+			if(State == PlayerState.BLOCKED)
+				State = PlayerState.IDLE;
+			else State = PlayerState.BLOCKED;
+
+			// Show/Hide UI
+			Inventory.Visible = !Inventory.Visible;
+			GD.Print("Bloop");
 		}
 	}
 }
