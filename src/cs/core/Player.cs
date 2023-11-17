@@ -155,7 +155,6 @@ public partial class Player : CharacterBody2D {
 
 			// Show/Hide UI
 			Inventory.Visible = !Inventory.Visible;
-			GD.Print("Bloop");
 		}
 	}
 }
