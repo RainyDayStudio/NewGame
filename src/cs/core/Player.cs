@@ -77,7 +77,7 @@ public partial class Player : CharacterBody2D {
 	private InteractionManager IntM;
 
 	// Player Inventory
-	private Node2D Inventory;
+	private InventoryManager InvM;
 
 	// ==================== Internal fields ====================
 	// Stores the players current state
@@ -93,7 +93,7 @@ public partial class Player : CharacterBody2D {
 		Hitbox = GetNode<CollisionShape2D>("Hitbox");
 		IM = GetNode<InputManager>("InputManager");
 		IntM = GetNode<InteractionManager>("InteractionManager");
-		Inventory = GetNode<Node2D>("Inventory");
+		InvM = GetNode<InventoryManager>("InventoryManager");
 	}
 
 	// Called at the start of every frame
@@ -139,7 +139,7 @@ public partial class Player : CharacterBody2D {
 	// Checks for an interaction input and calls the interaction handler
 	private void HandleInteraction() {
 		// Check the input manager for an interaction request
-		if(IM._CheckInteractionInput()) {
+		if(IM._CheckInteractionInput(!InvM.IsOpen)) {
 			// Request an interaction
 			IntM._HandleInteraction();
 		}
@@ -148,13 +148,15 @@ public partial class Player : CharacterBody2D {
 	private void HandleInventory() {
 		// Check the input manager for open inventory input
 		if(IM._CheckInventoryInput()) {
-			// Change Player State
-			if(State == PlayerState.BLOCKED)
+			if(InvM.IsOpen) {
+				// Inventory should be closed
 				State = PlayerState.IDLE;
-			else State = PlayerState.BLOCKED;
-
-			// Show/Hide UI
-			Inventory.Visible = !Inventory.Visible;
+				InvM.Close();
+			} else {
+				// Inventory should be opened
+				State = PlayerState.BLOCKED;
+				InvM.Open();
+			}
 		}
 	}
 }

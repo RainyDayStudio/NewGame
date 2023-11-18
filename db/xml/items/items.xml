@@ -17,15 +17,9 @@
 -->
 <db>
     <item id="test" name="ShinyPebble">
-        <ingredient name="Shiny">
-			<amount>2</amount>
-			<volume>5</volume>
-		</ingredient>
+        <ingredient name="Shiny" amount="2" volume="5"\>
     </item>
 	<item id="test" name="NewtEye">
-        <ingredient name="Newt">
-			<amount>3</amount>
-			<volume>3</volume>
-		</ingredient>
+        <ingredient name="Newt" amount="3" volume="3"\>
     </item>
 </db>

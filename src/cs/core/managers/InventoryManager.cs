@@ -16,62 +16,59 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 using Godot;
-using Microsoft.VisualBasic;
 using System;
 using System.Diagnostics;
 
 // Models the player's inventory
-public partial class Inventory : Node2D {
+public partial class InventoryManager : Node2D {
 
 	// ==================== Inventory Definitions=================
-	// Number of inventory slots
-	const int INVENTORY_SIZE = 3*7;
 
 	// ==================== Inventory Signals ====================
 
 	// ==================== Inventory Exports ====================
+	// Number of inventory slots
+	[Export]
+	int InventorySize = 3*7;
 
 	// ==================== Children Nodes =======================
 	// The Inventory's sprite (i.e. visual element)
 	private Sprite2D Background;
 
-	// Enables the use of input
-	private InputManager IM;
-
 	// ==================== Internal fields ====================
 	// Stores the actual inventory
-	private int[] InventoryArray = new int[INVENTORY_SIZE];
+	private Inventory inventory;
+	private bool isOpen;
 
 	// ==================== GODOT Method Overrides ====================
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
 		// Fetch the children nodes
 		Background = GetNode<Sprite2D>("Background");
-		IM = GetNode<InputManager>("InputManager");
 
-        // Debug: Start with non-empty inventory
-        
+        // Initialize internal fields
+        inventory = new Inventory(InventorySize);
+		isOpen = false;
 	}
 
 	// Called at the start of every frame
 	public override void _Process(double delta) {
-		HandleCursor();
 	}
 
-	// ==================== Internal Helpers ====================
-	// Handles cursor interaction
-	private void HandleCursor() {
-		// Check the input manager for open inventory input
-		/*
-		if(IM._CheckInventoryInput()) {
-			// Change Player State
-			if(State == PlayerState.BLOCKED)
-				State = PlayerState.IDLE;
-			else State = PlayerState.BLOCKED;
+	// Called when inventory is opened
+	public void Open() {
+		Background.Show();
+		isOpen = true;
+	}
 
-			// Show/Hide UI
-			Inventory.Visible = !Inventory.Visible;
-		}*/
+	// Called when inventory is closed
+	public void Close() {
+		Background.Hide();
+		isOpen = false;
+	}
+
+	public bool IsOpen {
+		get { return isOpen; }
 	}
 }
 

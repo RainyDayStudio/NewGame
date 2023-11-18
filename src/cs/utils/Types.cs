@@ -17,6 +17,7 @@
 */
 using Godot;
 using System;
+using System.Collections.Generic;
 
 // ==================================================
 // This file contains all of utility type declarations
@@ -41,6 +42,19 @@ public interface Interactable {
 
 	// Triggers a reaction when an interactor exits the interaction range
 	public void ExitInteractRange();
+}
+
+// Item type used in inventories
+public struct Item {
+	string ingredient;
+	double amount;
+	double volume;
+}
+
+// Utility type used to store inventory contents
+public class Inventory : List<Item> {
+	public Inventory() : base() {}
+	public Inventory(Int32 capacity) : base(capacity) {}
 }
 
 // Fancy enum that models the languages available for the game
