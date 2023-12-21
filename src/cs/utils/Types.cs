@@ -46,19 +46,52 @@ public interface Interactable {
 
 // Item type used in inventories
 public struct Item {
-	string ingredient;
-	double amount;
-	double volume;
+	public string name;
+	public int stackSize;
 }
 
-// Utility type used to store inventory contents
-public class Inventory : List<Item> {
-	public Inventory() : base() {}
-	public Inventory(Int32 capacity) : base(capacity) {}
+// Inventory slot
+public struct InventorySlot {
+	public Item item;
+	public int count;
+	public int position;
+
+	// Basic constructor, item is mandatory because a null Item InventorySlot
+	// shouldn't exist
+	public InventorySlot(Item item, int position = 0, int count = 1) { 
+		this.item = item;
+		this.position = position;
+		this.count = count;
+	}
+
+	// Increment or decrement the amount of items in this slot
+    public void UpdateCount(int deltaCount) {
+        count += deltaCount;
+    }
+}
+
+// Inventory definition
+public struct Inventory {
+    public string Name;
+	public List<InventorySlot> Contents;
+	public int MaxSize;
+
+	// Constructor for Inventory, requires name for identification
+    public Inventory(string newName, int InventorySize = 21) {
+        Name = newName;
+        Contents = new();
+		MaxSize = InventorySize;
+    }
+        
+	// Update the amount of items in slot slotIndex
+	// parameter count can be positive or negative
+	public void UpdateCount(int slotIndex, int count) {
+		Contents[slotIndex].UpdateCount(count);
+	}
 }
 
 // Fancy enum that models the languages available for the game
-public readonly struct Language {
+    public readonly struct Language {
 	// Represents the different types of languages
 	public enum Type { EN, FR, DE, IT };
 

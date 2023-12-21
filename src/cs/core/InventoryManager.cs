@@ -37,7 +37,6 @@ public partial class InventoryManager : Node2D {
 
 	// ==================== Internal fields ====================
 	// Stores the actual inventory
-	private Inventory inventory;
 	private bool isOpen;
 
 	// ==================== GODOT Method Overrides ====================
@@ -47,7 +46,7 @@ public partial class InventoryManager : Node2D {
 		Background = GetNode<Sprite2D>("Background");
 
         // Initialize internal fields
-        inventory = new Inventory(InventorySize);
+        //inventory = new Inventory(InventorySize);
 		isOpen = false;
 	}
 
