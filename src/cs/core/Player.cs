@@ -18,6 +18,7 @@
 using Godot;
 using Microsoft.VisualBasic;
 using System;
+using System.Diagnostics;
 
 // Models the player, i.e. the user's entry point into the game
 // This will handle all inputs as well as their related character animations
@@ -75,6 +76,9 @@ public partial class Player : CharacterBody2D {
 	// Enables the use of interaction
 	private InteractionManager IntM;
 
+	// Player Inventory
+	private InventoryManager InvM;
+
 	// ==================== Internal fields ====================
 	// Stores the players current state
 	private PlayerState State = PlayerState.IDLE;
@@ -89,6 +93,7 @@ public partial class Player : CharacterBody2D {
 		Hitbox = GetNode<CollisionShape2D>("Hitbox");
 		IM = GetNode<InputManager>("InputManager");
 		IntM = GetNode<InteractionManager>("InteractionManager");
+		InvM = GetNode<InventoryManager>("InventoryManager");
 	}
 
 	// Called at the start of every frame
@@ -100,6 +105,9 @@ public partial class Player : CharacterBody2D {
 
 		// Handle the player's interactions
 		HandleInteraction();
+
+		// Handle player Inventory
+		HandleInventory();
 	}
 
 	// ==================== Internal Helpers ====================
@@ -131,9 +139,24 @@ public partial class Player : CharacterBody2D {
 	// Checks for an interaction input and calls the interaction handler
 	private void HandleInteraction() {
 		// Check the input manager for an interaction request
-		if(IM._CheckInteractionInput()) {
+		if(IM._CheckInteractionInput(!InvM.IsOpen)) {
 			// Request an interaction
 			IntM._HandleInteraction();
+		}
+	}
+
+	private void HandleInventory() {
+		// Check the input manager for open inventory input
+		if(IM._CheckInventoryInput()) {
+			if(InvM.IsOpen) {
+				// Inventory should be closed
+				State = PlayerState.IDLE;
+				InvM.Close();
+			} else {
+				// Inventory should be opened
+				State = PlayerState.BLOCKED;
+				InvM.Open();
+			}
 		}
 	}
 }

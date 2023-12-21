@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0jv7lfy5nnar"]
+
+[ext_resource type="Texture2D" uid="uid://dx22isq51inht" path="res://assets/test/Inventory.png" id="1_4ebyf"]
+[ext_resource type="Script" path="res://src/cs/core/managers/InventoryManager.cs" id="1_4yfdj"]
+
+[node name="InventoryManager" type="Node2D"]
+top_level = true
+script = ExtResource("1_4yfdj")
+
+[node name="Background" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(578.222, 324.75)
+scale = Vector2(4.46181, 4.46181)
+texture = ExtResource("1_4ebyf")
