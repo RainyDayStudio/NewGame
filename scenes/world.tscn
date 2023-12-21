@@ -1646,6 +1646,12 @@ scale = Vector2(3, 3)
 RunSpeed = 400
 WalkSpeed = 300
 
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(-166.667, -83.3333)
+scale = Vector2(0.333333, 0.333333)
+offset = Vector2(500, 250)
+position_smoothing_enabled = true
+
 [node name="Bounderies" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bounderies"]
