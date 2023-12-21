@@ -18,14 +18,21 @@
 using Godot;
 using System;
 
-// A simple interactable book
-public partial class Book : Node2D, Interactable {
+// Represents a door in the game. Doors are the way the player can travel
+// From one scene to the next in the fame.
+public partial class Door : Node2D, Interactable {
+	//  ==================== Exports ====================
+	[Export]
+	// The scene to which this door will send us
+	public string TargetScenePath;
 
 	// ==================== Children Nodes ====================
 
 	// Sprite that indicates what button to press
 	private Sprite2D E;
-	private StaticBody2D Hitbox;
+	
+	// Handles the scene switching
+	private SceneManager SM;
 
 	// ==================== GODOT Method Overrides ====================
 
@@ -33,32 +40,27 @@ public partial class Book : Node2D, Interactable {
 	public override void _Ready() {
 		// Fetch children
 		E = GetNode<Sprite2D>("E");
-		Hitbox = GetNode<StaticBody2D>("Hitbox");
+		SM = GetNode<SceneManager>("/root/SceneManager");
 
-		// Initially hide the overlay
 		E.Hide();
 	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta) {}
 
 	// ==================== Interactable interface implements ====================
 
-	// A book interaction simply hides the book for now
-	public bool Interact() {
-		Hide();
-		Hitbox.CollisionLayer = 2;
-		
+	// A door will send you to another scene when opened
+    public bool Interact() {
+        // Switch Scenes
+		SM.GotoScene("res://scenes/" + TargetScenePath + ".tscn");
 		return true;
-	}
+    }
 
-	// Entering the book's range will show a E overlay
-	public void EnterInteractRange() {
-		E.Show();
-	}
+	// Simply show the interaction prompt
+    public void EnterInteractRange() {
+        E.Show();
+    }
 
-	// On exit, hide the E overlay again
-	public void ExitInteractRange() {
-		E.Hide();
-	}
+	// Hide the interaction prompt
+    public void ExitInteractRange() {
+        E.Hide();
+    }
 }
