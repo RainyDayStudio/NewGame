@@ -25,6 +25,7 @@ public partial class Book : Node2D, Interactable {
 
 	// Sprite that indicates what button to press
 	private Sprite2D E;
+	private StaticBody2D Hitbox;
 
 	// ==================== GODOT Method Overrides ====================
 
@@ -32,6 +33,7 @@ public partial class Book : Node2D, Interactable {
 	public override void _Ready() {
 		// Fetch children
 		E = GetNode<Sprite2D>("E");
+		Hitbox = GetNode<StaticBody2D>("Hitbox");
 
 		// Initially hide the overlay
 		E.Hide();
@@ -45,6 +47,8 @@ public partial class Book : Node2D, Interactable {
 	// A book interaction simply hides the book for now
 	public bool Interact() {
 		Hide();
+		Hitbox.CollisionLayer = 2;
+		
 		return true;
 	}
 
