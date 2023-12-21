@@ -1,14 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://dn2him3yja7py"]
+[gd_scene load_steps=6 format=3 uid="uid://brs5oh8pnrs2d"]
 
-[ext_resource type="PackedScene" uid="uid://x548q107qlrk" path="res://scenes/core/player.tscn" id="1_c1fn1"]
-[ext_resource type="Texture2D" uid="uid://c645th6qpldi1" path="res://assets/tdrpg_interior.png" id="1_erupp"]
-[ext_resource type="PackedScene" uid="uid://c6amx8mnr12s5" path="res://scenes/interactables/book.tscn" id="2_l0s1p"]
-[ext_resource type="PackedScene" uid="uid://biqfp7ic8b3iw" path="res://scenes/core/npc.tscn" id="3_orsak"]
-[ext_resource type="PackedScene" uid="uid://b0fhpw30u2dpp" path="res://scenes/interactables/door.tscn" id="5_f3s3l"]
+[ext_resource type="Texture2D" uid="uid://c645th6qpldi1" path="res://assets/tdrpg_interior.png" id="1_4rn27"]
+[ext_resource type="PackedScene" uid="uid://x548q107qlrk" path="res://scenes/core/player.tscn" id="2_yibmy"]
+[ext_resource type="PackedScene" uid="uid://b0fhpw30u2dpp" path="res://scenes/interactables/door.tscn" id="5_2x7lw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y3cbv"]
 resource_name = "Inside"
-texture = ExtResource("1_erupp")
+texture = ExtResource("1_4rn27")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -1613,7 +1611,14 @@ sources/0 = SubResource("TileSetAtlasSource_y3cbv")
 
 [node name="World" type="Node2D"]
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -1632.0
+offset_top = -1225.0
+offset_right = 2906.0
+offset_bottom = 2077.0
+
 [node name="TileMap" type="TileMap" parent="."]
+visible = false
 scale = Vector2(4, 4)
 tile_set = SubResource("TileSet_up0gh")
 format = 2
@@ -1641,7 +1646,7 @@ layer_3/y_sort_origin = 0
 layer_3/z_index = 0
 layer_3/tile_data = PackedInt32Array(393219, 0, 49, 65537, 65536, 50, 131083, 196608, 43, 15, 720896, 0, 65551, 720896, 1, 131087, 720896, 2, 196623, 720896, 3, 9, 720896, 0, 65545, 720896, 1, 131081, 720896, 2, 196617, 720896, 3)
 
-[node name="Player" parent="." instance=ExtResource("1_c1fn1")]
+[node name="Player" parent="." instance=ExtResource("2_yibmy")]
 position = Vector2(500, 250)
 scale = Vector2(3, 3)
 RunSpeed = 400
@@ -1653,15 +1658,7 @@ WalkSpeed = 300
 position = Vector2(571, 322)
 polygon = PackedVector2Array(-566, -333, -565, 316, 565, 314, 566, -319, -564, -324, -566, -344, 588, -336, 587, 335, -585, 339, -581, -332)
 
-[node name="Book" parent="." instance=ExtResource("2_l0s1p")]
-position = Vector2(257, 157)
-scale = Vector2(0.21, 0.21)
-
-[node name="NPC" parent="." instance=ExtResource("3_orsak")]
-position = Vector2(940, 252)
-scale = Vector2(3.8, 3.8)
-
-[node name="Door" parent="." instance=ExtResource("5_f3s3l")]
-position = Vector2(520, 633)
+[node name="Door" parent="." instance=ExtResource("5_2x7lw")]
+position = Vector2(508, 167)
 scale = Vector2(0.59, 0.59)
-TargetScenePath = "void"
+TargetScenePath = "world"

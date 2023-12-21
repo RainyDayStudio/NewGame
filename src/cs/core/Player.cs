@@ -75,6 +75,9 @@ public partial class Player : CharacterBody2D {
 	// Enables the use of interaction
 	private InteractionManager IntM;
 
+	// Camera, this controls what the user sees
+	private Camera2D Camera;
+
 	// ==================== Internal fields ====================
 	// Stores the players current state
 	private PlayerState State = PlayerState.IDLE;
@@ -89,6 +92,7 @@ public partial class Player : CharacterBody2D {
 		Hitbox = GetNode<CollisionShape2D>("Hitbox");
 		IM = GetNode<InputManager>("InputManager");
 		IntM = GetNode<InteractionManager>("InteractionManager");
+		Camera = GetNode<Camera2D>("Camera");
 	}
 
 	// Called at the start of every frame
