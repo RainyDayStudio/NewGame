@@ -9,7 +9,7 @@ atlas = ExtResource("1_7mt6a")
 region = Rect2(-2, 31.9254, 36.2555, 64.5746)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mdmur"]
-radius = 135.0
+radius = 95.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1g3mb"]
 size = Vector2(123, 73)
@@ -18,23 +18,26 @@ size = Vector2(123, 73)
 script = ExtResource("1_o7t0c")
 
 [node name="BookSprite" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(-2, -67.5)
 scale = Vector2(3.7, 3.7)
 texture = SubResource("AtlasTexture_b0hc4")
 
 [node name="E" type="Sprite2D" parent="."]
-position = Vector2(9, -254.5)
-scale = Vector2(7, 7)
+position = Vector2(4, -197.5)
+scale = Vector2(3, 3)
 texture = ExtResource("2_tmpoh")
 
 [node name="InteractRange" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractRange"]
-position = Vector2(-7, -76)
+position = Vector2(-1, -76)
 shape = SubResource("CircleShape2D_mdmur")
 
 [node name="Hitbox" type="StaticBody2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(-3.5, 8.5)
 shape = SubResource("RectangleShape2D_1g3mb")
+disabled = true
