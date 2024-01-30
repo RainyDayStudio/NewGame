@@ -214,6 +214,7 @@ graph_offset = Vector2(-121.898, 0)
 size = Vector2(14, 13)
 
 [node name="Player" type="CharacterBody2D"]
+scale = Vector2(3, 3)
 script = ExtResource("1_5abb1")
 
 [node name="Camera" type="Camera2D" parent="."]

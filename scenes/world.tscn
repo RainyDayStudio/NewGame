@@ -1643,7 +1643,6 @@ layer_3/tile_data = PackedInt32Array(393219, 0, 49, 65537, 65536, 50, 131083, 19
 
 [node name="Player" parent="." instance=ExtResource("1_c1fn1")]
 position = Vector2(500, 250)
-scale = Vector2(3, 3)
 RunSpeed = 400
 WalkSpeed = 300
 
