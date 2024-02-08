@@ -139,7 +139,7 @@ public partial class Player : CharacterBody2D {
 	// Checks for an interaction input and calls the interaction handler
 	private void HandleInteraction() {
 		// Check the input manager for an interaction request
-		if(IM._CheckInteractionInput(!InvM.IsOpen)) {
+		if(IM._CheckInteractionInput(!InvM.Visible)) {
 			// Request an interaction
 			IntM._HandleInteraction();
 		}
@@ -148,7 +148,7 @@ public partial class Player : CharacterBody2D {
 	private void HandleInventory() {
 		// Check the input manager for open inventory input
 		if(IM._CheckInventoryInput()) {
-			if(InvM.IsOpen) {
+			if(InvM.Visible) {
 				// Inventory should be closed
 				State = PlayerState.IDLE;
 				InvM.Close();

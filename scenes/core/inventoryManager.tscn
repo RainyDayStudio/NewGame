@@ -8,7 +8,6 @@ top_level = true
 script = ExtResource("1_4yfdj")
 
 [node name="Background" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(578.222, 324.75)
 scale = Vector2(4.46181, 4.46181)
 texture = ExtResource("1_4ebyf")

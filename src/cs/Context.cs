@@ -45,60 +45,18 @@ public partial class Context : Node {
 
     // Finds the inventory with the apropriate name
     // Creates a new one if necessary
-    private int FindInventory(string ReqName) {
+    private int FindInventory(string ReqName, bool isCreateNew = true) {
         int index = InventoryList.FindIndex(x => x.Name == ReqName);
 
-        if(index < 0) {
+        if(isCreateNew && index < 0) {
             // New inventory
             Inventory newInventory = new Inventory(ReqName);
             InventoryList.Add(newInventory);
 
-            index = InventoryList.Count;
+            index = InventoryList.Count-1;
         }
 
         return index;
-    }
-
-    // Adds Item to specified Inventory.
-    // Returns true if successful, false if not.
-    private bool AddItem(int inventoryIndex, Item newItem, int count) {
-
-        // Sort by slot position
-        var orderedByPosition = InventoryList[inventoryIndex].Contents
-            .Select((slot, idx) => (slot, idx))
-            .OrderBy(sloti => sloti.slot.position).ToList();
-
-        // Find list of the all valid slots containing newItem
-        var filteredList = orderedByPosition.Where(sloti =>
-                sloti.slot.item.name == newItem.name &&
-                sloti.slot.count + count <= newItem.stackSize
-            ).ToList();
-
-        if(filteredList.Any()) {
-            // Add items to slot
-            InventoryList[inventoryIndex].UpdateCount(filteredList[0].idx, count);
-
-        } else {
-            // New inventory slot:
-            // Fail if all slots are used
-            if (InventoryList[inventoryIndex].Contents.Count >= InventoryList[inventoryIndex].MaxSize) {
-                return false;
-            }
-
-            // To find first empty slot, iterate through sorted list by slot position.
-            // For the first position that doesn't correspond to the loop counter, the loop
-            // counter gives the position.
-            int newPosition = -1;
-            for(int i = 0; i < InventoryList[inventoryIndex].Contents.Count; i++) {
-                if (orderedByPosition[i].slot.position != i) {
-                    newPosition = i; 
-                    break;
-                }
-            }
-
-            InventoryList[inventoryIndex].Contents.Add(new(newItem,newPosition,count));
-        }
-        return true;
     }
 
     // ==================== GODOT Method Overrides ====================
@@ -106,6 +64,7 @@ public partial class Context : Node {
     // Called when the node enters the scene tree for the first time.
     public override void _Ready() {
         Lang = new(Language.Type.EN);
+        InventoryList = new();
 	}   
 
     // ==================== Public API ====================
@@ -116,14 +75,23 @@ public partial class Context : Node {
         Lang = L;
     }
 
-    // Inventory Interactions
-    public bool _AddItem(string Name, Item newItem, int Position, int count = 1)
-    {
-        int inventoryIndex;
+    // Getters and Setters for the inventory List
+    public Inventory _GetInventory(int index) => InventoryList[index];
+    public Inventory _GetInventory(string reqName) => InventoryList[FindInventory(reqName)];
+    public void _SetInventory(int index, Inventory Inv) {
+        InventoryList[index] = Inv;
+    }
+    public bool _SetInventory(string reqName, Inventory Inv) {
+        int index = FindInventory(reqName, false);
+        bool pass = false;
 
-        inventoryIndex = FindInventory(Name);
+        if(index > 0)
+        {
+            InventoryList[index] = Inv;
+            pass = true;
+        }
 
-        return AddItem(inventoryIndex, newItem, count);
+        return pass;
     }
 
 }
