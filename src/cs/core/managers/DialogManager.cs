@@ -74,22 +74,26 @@ public partial class DialogManager : Node2D {
 		if(DialogActive) {
 			Debug.Assert(DialogID == id);
 
+			// Check that the index doesn't overflow
+			if(DialogIdx >= DialogMaxIdx) {
+				// We've reached the end of the dialog
+				EndDialog();
+
+				// Notify that the dialog has ended
+				return false;
+			}
+
 			// Retrieve the text from the xml file
 			string text = TC._GetText(filename, id, DialogIdx.ToString());
 
 			// Display it (no size check because flemme)
 			Body.Text = text;
 
-			// Increment the index and check that it doesn't overflow
-			if(++DialogIdx == DialogMaxIdx) {
-				// End the dialog
-				EndDialog();
-
-				// Notify that the dialog has ended
-				return false;
-			}
 			// Show the E button to signal that an interaction is expected
 			E.Show();
+
+			// Prepare for the next dialog call
+			DialogIdx++;
 
 			// Notify that an interaction needs to happen
 			return true;

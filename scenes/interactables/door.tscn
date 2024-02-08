@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://b0fhpw30u2dpp"]
+
+[ext_resource type="Texture2D" uid="uid://4lie6oet5sqb" path="res://assets/test/Door_Animation/Door1_pipo.png" id="1_7mt6a"]
+[ext_resource type="Script" path="res://src/cs/interactables/Door.cs" id="1_o7t0c"]
+[ext_resource type="Texture2D" uid="uid://bl10v5tfraf7t" path="res://assets/test/presse1.png" id="2_tmpoh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0hc4"]
+atlas = ExtResource("1_7mt6a")
+region = Rect2(-2, 31.9254, 36.2555, 64.5746)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mdmur"]
+radius = 95.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1g3mb"]
+size = Vector2(123, 73)
+
+[node name="Door" type="Node2D"]
+script = ExtResource("1_o7t0c")
+
+[node name="BookSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-2, -67.5)
+scale = Vector2(3.7, 3.7)
+texture = SubResource("AtlasTexture_b0hc4")
+
+[node name="E" type="Sprite2D" parent="."]
+position = Vector2(4, -197.5)
+scale = Vector2(3, 3)
+texture = ExtResource("2_tmpoh")
+
+[node name="InteractRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractRange"]
+position = Vector2(-1, -76)
+shape = SubResource("CircleShape2D_mdmur")
+
+[node name="Hitbox" type="StaticBody2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-3.5, 8.5)
+shape = SubResource("RectangleShape2D_1g3mb")
+disabled = true

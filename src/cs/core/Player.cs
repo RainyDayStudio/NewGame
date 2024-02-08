@@ -78,6 +78,9 @@ public partial class Player : CharacterBody2D {
 
 	// Player Inventory
 	private InventoryManager InvM;
+  
+	// Camera, this controls what the user sees
+	private Camera2D Camera;
 
 	// ==================== Internal fields ====================
 	// Stores the players current state
@@ -94,6 +97,7 @@ public partial class Player : CharacterBody2D {
 		IM = GetNode<InputManager>("InputManager");
 		IntM = GetNode<InteractionManager>("InteractionManager");
 		InvM = GetNode<InventoryManager>("InventoryManager");
+		Camera = GetNode<Camera2D>("Camera");
 	}
 
 	// Called at the start of every frame
