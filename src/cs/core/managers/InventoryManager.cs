@@ -38,7 +38,7 @@ public partial class InventoryManager : Node2D {
 
 	// ==================== Children Nodes =======================
 	// The Inventory's sprite (i.e. visual element)
-	private Sprite2D Background;
+	private CanvasLayer GUIBackground;
 
 	// ==================== Internal fields ====================
 	// Stores the actual inventory
@@ -47,19 +47,25 @@ public partial class InventoryManager : Node2D {
 	// Context
 	private Context C;
 
+	// Item DB
+	private ItemManager IM;
+
 	// ==================== GODOT Method Overrides ====================
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
-		// Fetch the children nodes
-		Background = GetNode<Sprite2D>("Background");
+		// Fetch Child node
+		GUIBackground = GetNode<CanvasLayer>("CanvasLayer");
 
 		// Fetch Context
 		C = GetNode<Context>("/root/Context");
 
 		// Fetch appropriate Inventory from context
 		Inv = C._GetInventory(InventoryName);
+		
+		// Fetch Item DB
+		IM = GetNode<ItemManager>("/root/ItemManager");
 
-		Hide();
+		Close();
 	}
 
 
@@ -109,17 +115,24 @@ public partial class InventoryManager : Node2D {
     }
 
 	// ==================== Public API ====================
+
+	// Adds Item to inventory by name
+	public bool AddItemName(string itemName, int count) {
+		Item newItem = IM.GetItem(itemName, count);
+
+		return AddItem(newItem, count);
+	}
 	
 	// Called when inventory is opened
 	public void Open() {
 		Show();
-		//Potentially more stuff
+		GUIBackground.Show();
 	}
 
 	// Called when inventory is closed
 	public void Close() {
 		Hide();
-		//Potentially more stuff
+		GUIBackground.Hide();
 	}
 }
 

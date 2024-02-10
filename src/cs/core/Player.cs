@@ -163,5 +163,12 @@ public partial class Player : CharacterBody2D {
 			}
 		}
 	}
+
+	// ==================== Public API ====================
+	// Adds an item to Player's inventory.
+	// Returns success status
+	public bool AddItem(string itemName, int count=1) {
+		return InvM.AddItemName(itemName, count);
+	}
 }
 

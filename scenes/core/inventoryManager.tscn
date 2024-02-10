@@ -4,10 +4,20 @@
 [ext_resource type="Script" path="res://src/cs/core/managers/InventoryManager.cs" id="1_4yfdj"]
 
 [node name="InventoryManager" type="Node2D"]
-top_level = true
 script = ExtResource("1_4yfdj")
 
-[node name="Background" type="Sprite2D" parent="."]
-position = Vector2(578.222, 324.75)
-scale = Vector2(4.46181, 4.46181)
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Sprite2D" parent="CanvasLayer/Control"]
+scale = Vector2(4.4, 4.4)
 texture = ExtResource("1_4ebyf")

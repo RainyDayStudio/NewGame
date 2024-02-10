@@ -16,10 +16,24 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>. 
 -->
 <db>
-    <item id="test" name="ShinyPebble">
-        <ingredient name="Shiny" amount="2" volume="5"\>
+    <item name="ShinyPebble" type="ingredient">
+		<sprite></sprite>
+		<stack>64</stack>
+		<ingredient name="Shiny">
+			<amount>2</amount>
+			<volume>5</volume>
+		</ingredient>
     </item>
-	<item id="test" name="NewtEye">
-        <ingredient name="Newt" amount="3" volume="3"\>
+	<item name="NewtEye" type="ingredient">
+		<sprite></sprite>
+		<stack>64</stack>
+		<ingredient name="Newt">
+			<amount>3</amount>
+			<volume>3</volume>
+		</ingredient>
     </item>
+	<item name="book" type="tool">
+		<sprite>book.png</sprite>
+		<stack>1</stack>
+	<item/>
 </db>
