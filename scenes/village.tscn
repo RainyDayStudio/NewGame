@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dkg3okex71gd1"]
+[gd_scene load_steps=6 format=3 uid="uid://c16kxl4dtkb5y"]
 
 [ext_resource type="Texture2D" uid="uid://cw5ktd2eqygt4" path="res://assets/free version/free.png" id="1_o0p8v"]
 [ext_resource type="PackedScene" uid="uid://x548q107qlrk" path="res://scenes/core/player.tscn" id="2_fnamy"]
-[ext_resource type="PackedScene" uid="uid://b0fhpw30u2dpp" path="res://scenes/interactables/door.tscn" id="3_avd5l"]
+[ext_resource type="PackedScene" path="res://scenes/interactables/door.tscn" id="3_avd5l"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rrfai"]
 texture = ExtResource("1_o0p8v")

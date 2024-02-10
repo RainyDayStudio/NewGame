@@ -16,8 +16,10 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 using Godot;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 // Global state of the game
 // Records all persistent data for the game
@@ -30,16 +32,39 @@ public partial class Context : Node {
     // Signals that the language has been updated
     public delegate void UpdateLanguageEventHandler();
 
+
     // ==================== Persistent fields ====================
 
     // Current language
     private Language Lang;
 
+    // Inventories
+    private List<Inventory> InventoryList;
+
+    // ==================== Local Methods ====================
+
+    // Finds the inventory with the apropriate name
+    // Creates a new one if necessary
+    private int FindInventory(string ReqName, bool isCreateNew = true) {
+        int index = InventoryList.FindIndex(x => x.Name == ReqName);
+
+        if(isCreateNew && index < 0) {
+            // New inventory
+            Inventory newInventory = new Inventory(ReqName);
+            InventoryList.Add(newInventory);
+
+            index = InventoryList.Count-1;
+        }
+
+        return index;
+    }
+
     // ==================== GODOT Method Overrides ====================
 
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready() {
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready() {
         Lang = new(Language.Type.EN);
+        InventoryList = new();
 	}   
 
     // ==================== Public API ====================
@@ -48,6 +73,25 @@ public partial class Context : Node {
     public Language _GetLanguage() => Lang;
     public void _SetLanguage(Language L) {
         Lang = L;
+    }
+
+    // Getters and Setters for the inventory List
+    public Inventory _GetInventory(int index) => InventoryList[index];
+    public Inventory _GetInventory(string reqName) => InventoryList[FindInventory(reqName)];
+    public void _SetInventory(int index, Inventory Inv) {
+        InventoryList[index] = Inv;
+    }
+    public bool _SetInventory(string reqName, Inventory Inv) {
+        int index = FindInventory(reqName, false);
+        bool pass = false;
+
+        if(index > 0)
+        {
+            InventoryList[index] = Inv;
+            pass = true;
+        }
+
+        return pass;
     }
 
 }

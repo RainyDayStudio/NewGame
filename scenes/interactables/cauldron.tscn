@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2h4trgjjmi0g"]
+
+[ext_resource type="Texture2D" uid="uid://ksays57s80xd" path="res://assets/test/cauldron.png" id="1_b61n6"]
+[ext_resource type="Script" path="res://src/cs/interactables/Cauldron.cs" id="1_c6ohw"]
+[ext_resource type="Texture2D" uid="uid://bl10v5tfraf7t" path="res://assets/test/presse1.png" id="2_prgoe"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eiqdj"]
+radius = 14.0357
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jxenj"]
+radius = 28.0179
+
+[node name="Cauldron" type="Node2D"]
+script = ExtResource("1_c6ohw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_b61n6")
+
+[node name="Hitbox" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_eiqdj")
+
+[node name="InteractionRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionRange"]
+shape = SubResource("CircleShape2D_jxenj")
+
+[node name="E" type="Sprite2D" parent="."]
+position = Vector2(1, -25)
+texture = ExtResource("2_prgoe")

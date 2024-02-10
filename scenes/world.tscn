@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dn2him3yja7py"]
+[gd_scene load_steps=9 format=3 uid="uid://dn2him3yja7py"]
 
 [ext_resource type="PackedScene" uid="uid://x548q107qlrk" path="res://scenes/core/player.tscn" id="1_c1fn1"]
 [ext_resource type="Texture2D" uid="uid://c645th6qpldi1" path="res://assets/tdrpg_interior.png" id="1_erupp"]
 [ext_resource type="PackedScene" uid="uid://c6amx8mnr12s5" path="res://scenes/interactables/book.tscn" id="2_l0s1p"]
 [ext_resource type="PackedScene" uid="uid://biqfp7ic8b3iw" path="res://scenes/core/npc.tscn" id="3_orsak"]
-[ext_resource type="PackedScene" uid="uid://b0fhpw30u2dpp" path="res://scenes/interactables/door.tscn" id="5_f3s3l"]
+[ext_resource type="PackedScene" uid="uid://b2h4trgjjmi0g" path="res://scenes/interactables/cauldron.tscn" id="4_3jo0c"]
+[ext_resource type="PackedScene" path="res://scenes/interactables/door.tscn" id="5_f3s3l"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y3cbv"]
 resource_name = "Inside"
@@ -1660,6 +1661,10 @@ scale = Vector2(0.21, 0.21)
 [node name="NPC" parent="." instance=ExtResource("3_orsak")]
 position = Vector2(940, 252)
 scale = Vector2(3.8, 3.8)
+
+[node name="Cauldron" parent="." instance=ExtResource("4_3jo0c")]
+position = Vector2(1095, 613)
+scale = Vector2(2.5, 2.5)
 
 [node name="Door" parent="." instance=ExtResource("5_f3s3l")]
 position = Vector2(520, 633)
