@@ -1,0 +1,82 @@
+<!-- 
+    Detective-style problem-solving magical rpg
+	Copyright (C) 2023 Rainy Day Studio
+
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this program.  If not, see <https://www.gnu.org/licenses/>. 
+-->
+<db>
+    <!--
+        Represents the root of a quest config
+        id: human readable unique quest name
+        obj-type: how the objectives are treated
+            ordered: objectives must be completed in id order
+            unordered: objectives can be completed in any order
+        type: main quest (mandatory), side quest (optional)
+    -->
+    <quest id="welcome" obj-type="unordered" type="main">
+        <!-- List of prerequisits to start this quest -->
+        <prereq>
+            <!-- Quest to complete before-->
+            <completed id="welcomeEx"/>
+            <!-- Where the player must be to trigger the quest -->
+            <location id="shop"/>
+            <!-- When the quest can be triggered (day or night time)-->
+            <time id="day"/>
+            <!-- Interaction needed to trigger the quest
+                target: NPC id, object id-->
+            <interact target="Guy"/>
+        </prereq>
+        <!-- List of objectives -->
+        <objective id="0">
+            <!-- Objective that must have been completed before this one -->
+            <completed id="-1"/>
+            <!-- Unique object id and amount needed -->
+            <item id="book" amount="1"/>
+            <!-- Location to reach to complete objective -->
+            <location id="shop"/>
+            <!-- Action to perform to complete objective
+                id: spell name, sleep, consume, ... -->
+            <action id="flipendoSpell"/>
+            <!-- Interaction needed to complete objective
+                target: NPC id, object id-->
+            <interact target="Guy"/>
+            <reward>
+                <!-- Unique object id and amount received -->
+                <item id="cookie" amount="1"/>
+                <!-- Location unlocked by completing the objective -->
+                <location id="garden"/>
+            </reward>
+        </objective>
+        <!-- Quest main reward -->
+        <reward>
+            <!-- Unique object id and amount received -->
+            <item id="cookie" amount="1"/>
+            <!-- Location unlocked by completing the objective -->
+            <location id="garden"/>
+        </reward>
+    </quest>
+
+    <quest id="Dummy" obj-type="unordered" type="main">
+        <!-- List of objectives -->
+        <objective id="0">
+            <!-- Unique object id and amount needed -->
+            <item id="book" amount="1"/>
+        </objective>
+        <objective id="1">
+            <!-- Interaction needed to complete objective
+                target: NPC id, object id-->
+            <interact target="Guy"/>
+        </objective>
+    </quest>
+</db>

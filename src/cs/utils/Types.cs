@@ -17,6 +17,7 @@
 */
 using Godot;
 using System;
+using System.Collections.Generic;
 
 // ==================================================
 // This file contains all of utility type declarations
@@ -111,4 +112,34 @@ public readonly struct Language {
 	// Override of the get hashcode method (needed to overload == and !=)
 	public override int GetHashCode() => HashCode.Combine(lang);
 }
+
+// ============================================================
+// ===================== QUEST DATATYPES ======================
+// ============================================================
+
+// tout en pascal et _ devant les fonctions d'API publiques
+
+// Represents quests' prerequisits
+public interface Prerequisit {
+
+	/// <summary>
+	/// Ensures that the prerequisit is satisfied
+	/// </summary>
+	/// <returns>True if prerequisit is satisfied, false otherwise</returns>
+	public bool _Satisfied();
+}	
+
+public interface Objective {
+
+    /// <summary>
+    /// Checks if the objective has been completed
+    /// </summary>
+    /// <returns>True if objective completed</returns>
+	public bool _Completed();
+}
+
+public enum GameTime {
+	DAY, NIGHT
+}
+
 } // End Godot namespace

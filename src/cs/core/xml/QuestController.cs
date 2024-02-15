@@ -23,13 +23,17 @@ using System.Collections.Generic;
 
 // Utility class used to access XML db files.
 // This is usually done to display text in a way that is linguistically dynamic .
-public partial class TextController : XMLController {
+public partial class QuestController : XMLController {
 
 	// ==================== Dialog related Constants ====================
 
-	private const string DIALOG_ID = "dialog";
-	private const string TEXT_ID = "text";
+	private const string QUEST_ID = "quest";
+	private const string PREREQ_ID = "prereq";
+	private const string OBJECTIVE_ID = "objective";
+	private const string REWARD_ID = "reward";
 	private const string ID = "id";
+	private const string OBJ_TYPE = "obj-type";
+	private const string TYPE = "type";
 
 	// ==================== Internal fields ====================
 
@@ -44,9 +48,6 @@ public partial class TextController : XMLController {
 	// Context
 	private Context C;
 
-	// Quest xml file name (all the quests are in this file)
-	private const string QUEST_FILENAME = "quests.xml";
-
 	// ==================== GODOT Method Overrides ====================
 
 	// Called when the node enters the scene tree for the first time.
@@ -60,47 +61,69 @@ public partial class TextController : XMLController {
 
 	// ==================== Public API ====================
 
-	  // Updates the language the textcontroller is set to  
+	  // Updates the language the Questcontroller is set to  
 	public void _UpdateLanguage() {
 		// Check that the given language is new
 		if(C._GetLanguage() != Lang) {
 			Lang = C._GetLanguage();
 			
 			// Update the loaded xml
-			ParseXML(ref LoadedXML, Path.Combine(DIALOG_ID, Lang.ToString() + "/" + LoadedFileName));
+			ParseXML(ref LoadedXML, Path.Combine(QUEST_ID, Lang.ToString() + "/" + LoadedFileName));
 		}
 	}
 
-	// Retrieves the number of text entries in a dialog
-	public int _GetNTexts(string filename, string groupid) {
+	// Retrieves the type of objectives
+	public string _GetObjectiveType(string filename, string questid) {
 		// Start by checking if the file is loaded in or not
 		CheckXML(filename);
 
-		// retrieve the number of elements in the given group
-		IEnumerable<int> n_texts = from g in LoadedXML.Root.Descendants(DIALOG_ID)
-					where g.Attribute(ID).Value == groupid
-					select g.Descendants(TEXT_ID).Count();
-		
-		// Extract the result and return it
-		return n_texts.ElementAt(0);
+		return (
+			from q in LoadedXML.Root.Descendants(QUEST_ID)
+			where q.Attribute(ID).Value == questid
+			select q.Attribute(OBJ_TYPE).Value).ElementAt(0);
 	}
 
-	// Queries the given xml file to retrieve the wanted text
-	public string _GetText(string filename, string dialogid, string id) {
+	// Retrieves the quest type
+	public string _GetQuestType(string filename, string questid) {
 		// Start by checking if the file is loaded in or not
 		CheckXML(filename);
 
-		// Query the file
-		var query = from g in LoadedXML.Root.Descendants(DIALOG_ID)
-					where g.Attribute(ID).Value == dialogid // Find the correct group
-					select (
-						from t in g.Descendants(TEXT_ID)
-						where t.Attribute(ID).Value == id // Find the correct text in the group
-						select t.Value
-					);
+		return (
+			from q in LoadedXML.Root.Descendants(QUEST_ID)
+			where q.Attribute(ID).Value == questid
+			select q.Attribute(TYPE).Value).ElementAt(0);
+	}
+	
+	// Retrieves all quest's prerequisits
+	public string _GetPrereqs(string filename, string questid) {
+		// Start by checking if the file is loaded in or not
+		CheckXML(filename);
 
-		// Extract query result
-		return query.ElementAt(0).ElementAt(0);
+		IEnumerable<XElement> quest =
+			from q in LoadedXML.Root.Descendants(QUEST_ID)
+			where q.Attribute(ID).Value == questid
+			select q;
+
+		// return quest.Descendants("prereq").Select(p => )
+		// TODO
+		return "";
+	}
+	
+	// Retrieves all quest's objectives
+	public List<Objective> _GetObjectives(string filename, string questid) {
+		// Start by checking if the file is loaded in or not
+		CheckXML(filename);
+
+		IEnumerable<XElement> quest =
+			from q in LoadedXML.Root.Descendants(QUEST_ID)
+			where q.Attribute(ID).Value == questid
+			select q;
+
+		return quest.Descendants("objective").Select(
+			o => (Objective) new ItemObjective(
+				o.Attribute("id").Value,
+				o.Attribute("amount").Value.ToInt()
+			)).ToList();
 	}
 
 	// ==================== Internal Helpers ====================
@@ -110,7 +133,7 @@ public partial class TextController : XMLController {
 		// Check if the file is loaded in or not
 		if(LoadedFileName != filename || LoadedLanguage != Lang) {
 			// If not parse the file
-			ParseXML(ref LoadedXML, Path.Combine(DIALOG_ID, Lang.ToString() + "/" + filename));
+			ParseXML(ref LoadedXML, Path.Combine(QUEST_ID, Lang.ToString() + "/" + filename));
 
 			// Update the current loaded file data
 			LoadedFileName = filename;
