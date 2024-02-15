@@ -66,4 +66,17 @@
             <location id="garden"/>
         </reward>
     </quest>
+
+    <quest id="Dummy" obj-type="unordered" type="main">
+        <!-- List of objectives -->
+        <objective id="0">
+            <!-- Unique object id and amount needed -->
+            <item id="book" amount="1"/>
+        </objective>
+        <objective id="1">
+            <!-- Interaction needed to complete objective
+                target: NPC id, object id-->
+            <interact target="Guy"/>
+        </objective>
+    </quest>
 </db>

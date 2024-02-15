@@ -35,11 +35,15 @@ public partial class Context : Node {
     // Current language
     private Language Lang;
 
+	// Manages all the quests
+	private QuestManager QM;
+
     // ==================== GODOT Method Overrides ====================
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
         Lang = new(Language.Type.EN);
+		QM = GetNode<QuestManager>("QuestManager");
 	}   
 
     // ==================== Public API ====================

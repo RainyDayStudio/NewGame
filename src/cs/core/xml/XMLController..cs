@@ -30,8 +30,8 @@ public abstract partial class XMLController : Node {
 
 	// ==================== XML Generic methods ====================
 
-	// Parses a given xml file and stores in in a target XDocument object
-	// The filename should include the relative path from db/
+	// Parses a given xml file and stores it in a target XDocument object
+	// The filename should include the relative path from db/xml/
 	protected void ParseXML(ref XDocument targetXML, string filename) {
 		if(filename == null) {
 			throw new Exception("No xml file was input for the scene!");
